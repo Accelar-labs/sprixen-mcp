@@ -3,8 +3,12 @@
   "name": "com.sprixen/sprixen",
   "title": "Sprixen",
   "description": "AI game assets for agents: consistent sprites, 2D animations, tiles, maps, music and engine exports.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "websiteUrl": "https://sprixen.com/docs/mcp",
+  "repository": {
+    "url": "https://github.com/Accelar-labs/sprixen-mcp",
+    "source": "github"
+  },
   "remotes": [
     {
       "type": "streamable-http",
