@@ -1,0 +1,69 @@
+---
+description: Sprixen MCP workflow, generate game sprites, animations, tiles, maps and music with style-locked projects. Apply whenever the task involves game sprites, pixel art, character animation, tilesets, or game assets.
+globs:
+alwaysApply: false
+---
+
+# Sprixen, game asset generation
+
+Sprixen is reachable through an MCP server (47 tools, Streamable HTTP)
+at `https://api.sprixen.com/v1/mcp`, authenticated with
+`Authorization: Bearer spx_live_...`. If it isn't in `.cursor/mcp.json`
+yet, add it (get a key at https://sprixen.com/settings/api):
+
+```json
+{
+  "mcpServers": {
+    "sprixen": {
+      "url": "https://api.sprixen.com/v1/mcp",
+      "headers": { "Authorization": "Bearer spx_live_YOUR_KEY" }
+    }
+  }
+}
+```
+
+## Workflow
+
+1. **Check credits**: call `get_credits` before starting. A character
+   with 3 animations costs at least 2 + 3×4 = 14 credits.
+2. **One project per game**: call `list_projects` and reuse an
+   existing one for style lock (`artStyle`, `resolution`, `viewAngle`,
+   `palette`). To create one, use `list_api_operations` (search
+   "projects") → `describe_api_operation` → `call_api` on
+   `POST /v1/projects` with `name`, `artStyle`
+   (`pixel_art`|`cartoon`|`anime`|`hand_drawn`|`chibi`), `resolution`
+   (`16x16`..`512x512`), `viewAngle`
+   (`side_scroll`|`top_down`|`isometric`|`front_facing`),
+   `pixelPerfect` (`auto`|`on`|`off`, default `auto`).
+3. **Generate the character**: `generate_sprite` with `prompt` +
+   `projectId`. Poll `get_generation` every ~5s until
+   `completed`/`failed`. Never resubmit while a job is queued.
+4. **Generate animations one at a time**: `generate_animation` with
+   `type` (`idle`|`walk`|`run`|`attack`|`jump`|`death`|`hurt`|`custom`),
+   `archetype` when known, `direction` for top-down/isometric (only
+   the directions the game needs), `weaponHand`/`weaponType`/
+   `hasShield` for equipped characters, `quality` `standard` (4
+   credits, default) or `premium` (8 credits, only if asked).
+   `list_sprite_animations` returns every version ever made, sort by
+   `createdAt`, keep the latest per type+direction.
+5. **Export**: `export_character_package` (engine
+   `godot`|`phaser`|`unity`|`gamemaker`|`rpgmaker-mz`) if available on
+   this account (check `list_api_operations` search "export" first , 
+   it's rolling out); otherwise use the raw sheet URLs from
+   `get_generation`. Maps export today via `export_map`
+   (`json`|`tmx`|`godot`).
+
+## Rules
+
+- Concrete subject prompts beat style adjectives, the project already
+  locks style, don't repeat it in every prompt.
+- Branch on the error `code`, not `message`. On
+  `INSUFFICIENT_CREDITS`, stop and report `hint.url`; don't retry or
+  downgrade silently.
+- Don't batch-generate many characters/animations without the user
+  asking for that scale first.
+- Don't auto-retry a failed generation more than once.
+- Don't default `pixelPerfect` to `"on"`.
+- Never put the API key anywhere but the MCP config header.
+
+Full reference: https://sprixen.com/docs/mcp
