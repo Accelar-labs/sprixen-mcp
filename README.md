@@ -57,7 +57,7 @@ Authorization = "Bearer spx_live_YOUR_KEY"
 
 ## Teach your agent
 
-The `skills/sprixen/SKILL.md` file is a Claude Code skill with the full workflow (check credits, one project per game for style lock, generate a character, generate animations one at a time and poll, export with `export_character_package`). `agents/AGENTS.md` is the same guidance for Codex and generic agents; `agents/sprixen.mdc` is a Cursor rule.
+The `skills/sprixen/SKILL.md` file is a Claude Code skill with the full workflow (check credits, one project per game for style lock, generate a character, generate animations one at a time and poll, export with `export_character_package`). `rules/AGENTS.md` is the same guidance for Codex and generic agents; `rules/sprixen.mdc` is a Cursor rule.
 
 ```bash
 mkdir -p ~/.claude/skills/sprixen && curl -fsSL https://sprixen.com/skills/sprixen/SKILL.md -o ~/.claude/skills/sprixen/SKILL.md
