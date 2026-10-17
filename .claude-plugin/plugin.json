@@ -1,0 +1,10 @@
+{
+  "name": "sprixen",
+  "version": "1.0.0",
+  "description": "Generate consistent game sprites, 2D animation sheets, tiles, maps, music and engine-ready exports from Claude Code with the Sprixen MCP server.",
+  "author": { "name": "Sprixen Team", "email": "contact@accelar.io", "url": "https://sprixen.com" },
+  "homepage": "https://sprixen.com/docs/mcp",
+  "repository": "https://github.com/Accelar-labs/sprixen-mcp",
+  "license": "MIT",
+  "keywords": ["game-assets", "sprites", "pixel-art", "animation", "tileset", "godot", "phaser", "unity", "mcp"]
+}

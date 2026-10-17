@@ -1,0 +1,14 @@
+{
+  "name": "sprixen",
+  "owner": { "name": "Sprixen Team", "email": "contact@accelar.io" },
+  "metadata": { "description": "Sprixen skill and MCP server for AI game asset generation." },
+  "plugins": [
+    {
+      "name": "sprixen",
+      "source": "./",
+      "description": "Generate consistent game sprites, 2D animation sheets, tiles, maps, music and engine-ready exports from Claude Code with the Sprixen MCP server.",
+      "homepage": "https://sprixen.com/docs/mcp",
+      "category": "development"
+    }
+  ]
+}

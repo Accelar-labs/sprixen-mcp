@@ -8,9 +8,24 @@ Sprixen is an AI game asset generator with a native [Model Context Protocol](htt
 - Full API reference: https://sprixen.com/docs and https://sprixen.com/llms-full.txt
 - Registry entry: `com.sprixen/sprixen` in the official MCP Registry (`server.json` in this repo)
 
+## Claude Code plugin
+
+Installs the MCP server and the Sprixen skill in one step. Set your key first (create one at https://sprixen.com/settings/api):
+
+```bash
+export SPRIXEN_API_KEY=spx_live_YOUR_KEY
+```
+
+Then, inside Claude Code:
+
+```
+/plugin marketplace add Accelar-labs/sprixen-mcp
+/plugin install sprixen@sprixen
+```
+
 ## Quick start
 
-Claude Code:
+Claude Code (without the plugin):
 
 ```bash
 claude mcp add --transport http sprixen https://api.sprixen.com/v1/mcp \

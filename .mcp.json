@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "sprixen": {
+      "type": "http",
+      "url": "https://api.sprixen.com/v1/mcp",
+      "headers": { "Authorization": "Bearer ${SPRIXEN_API_KEY}" }
+    }
+  }
+}
